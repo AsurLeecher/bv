@@ -1,13 +1,19 @@
 import base64
 import json
 import requests
+import os
 import re
 from io import StringIO, BytesIO
 from flask import Flask, render_template, request, send_file
 from jinja2 import Template
+from dotenv import load_dotenv
+load_dotenv()
+
+auth = os.environ['CHANDRA_API_AUTH']  # Will throw error if not set
 
 app = Flask(__name__)
-auth = "7b81679d-a829-4476-8dcf-9c3bb4e0c80a"
+
+#auth = "7b81679d-a829-4476-8dcf-9c3bb4e0c80a"
 
 def sanitize_filename(filename):
     return re.sub(r'[\\/*?:"<>|]', "_", filename)
